@@ -8,10 +8,10 @@
     "@testing-library/user-event": "*",
     "axios": "*",
     "concurrently": "*",
-    "json-server": "*",
+    "json-server": "^1.0.0-beta.3",
     "react": "*",
     "react-dom": "*",
-    "react-router-dom": "*",
+    "react-router-dom": "^7.1.1",
     "react-scripts": "*",
     "web-vitals": "*"
   },
