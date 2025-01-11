@@ -1,26 +1,22 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Nav from './Nav';
 import DogList from './DogList';
 import DogDetails from './DogDetails';
-import dogs from "../db.json";
+import data from "./db.json";
 
 function App() {
   return (
     <div className='App'>
       <div>
-        <Nav dogs={dogs} />
-      </div>
-      <div>
-        <Switch>
-          <Route exact path="/dogs" >
-            <DogList dogs={dogs} />
-          </Route>
-          <Route path="/dogs/:name" >
-            <DogDetails />
-          </Route>
-          <Redirect to="/dogs" />
-        </Switch>
+        <BrowserRouter>
+          <Nav dogs={data.dogs} />
+          <Routes>
+            <Route exact path="/dogs" element={<DogList dogs={data.dogs} />} />
+            <Route path="/dogs/:name" element={<DogDetails dogs={data.dogs} />} />
+            <Route path="*" element={<Navigate to="/dogs" />} />
+          </Routes>
+        </BrowserRouter>
       </div>
     </div>
   );

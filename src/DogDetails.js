@@ -1,18 +1,22 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import React from "react";
 
 /** DogDetails: shows all of the information about a single dog */
-const DogDetails = () => {
-    const dog = useParams();
+const DogDetails = ({ dogs }) => {
+    const params = useParams();
+    const curr_dog = dogs.find(dog => dog.name === params.name);
+
+    if (!curr_dog) return <Navigate to="/dogs" />
+
     return (
         <div>
-            <h2>{dog.name}</h2>
+            <h2>{curr_dog.name}</h2>
             <ul>
-                <li>{dog.age}</li>
-                <li><img src={`/public/${dog.src}.jpg`} /></li>
+                <li>{curr_dog.age}</li>
+                <li><img src={`/${curr_dog.src}.jpg`} alt={curr_dog.name} /></li>
                 <ul>
-                    {dog.facts.map((fact, idx) => (
-                        <li>{fact}</li>
+                    {curr_dog.facts.map((fact, idx) => (
+                        <li key={idx}>{fact}</li>
                     ))}
                 </ul>
             </ul>
